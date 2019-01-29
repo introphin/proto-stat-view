@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+// protoc --go_out=plugins=grpc:. *.proto
+
+package stat_view;
+
+message AdvertiserPayout {
+    int32 UserId = 1;
+    float AffiliatePayment = 2;
+    float AdvertiserPayment = 3;
+}
+
+message AdvertiserPayoutFilter {
+    string DateFrom = 1;
+    string DateTo = 2;
+    repeated int32 UserId = 3;
+    string Currency = 4;
+}
+
+message AdvertiserPayoutResponse {
+    repeated AdvertiserPayout items = 1;
+}
+
+message AffiliatePayoutFilter {
+    string DateFrom = 1;
+    string DateTo = 2;
+    repeated int32 UserId = 3;
+    string Currency = 4;
+}
+
+message AffiliatePayout {
+    int32 UserId = 1;
+    float AffiliatePayment = 2;
+}
+
+message AffiliatePayoutResponse {
+    repeated AffiliatePayout items = 1;
+}
+
+message FinanceTotalFilter {
+    string DateFrom = 1;
+    string DateTo = 2;
+    string Currency = 3;
+}
+
+message FinanceTotalResponse {
+    float AffiliatePayment = 1;
+    float AdvertiserPayment = 2;
+}
+
+message ListCompetitionsRequest {
+}
+
+message Competition {
+    int32 UserId = 1;
+    int32 Approve = 2;
+    float Chance = 3;
+}
+
+message ListCompetitionsResponse {
+    repeated Competition competitions = 1;
+}
+
+service StatView {
+    rpc GetAdvertiserPayout (AdvertiserPayoutFilter) returns (AdvertiserPayoutResponse) {
+    }
+    rpc GetAffiliatePayout (AffiliatePayoutFilter) returns (AffiliatePayoutResponse) {
+    }
+    rpc GetFinanceTotal (FinanceTotalFilter) returns (FinanceTotalResponse) {
+    }
+    rpc ListCompetitions (ListCompetitionsRequest) returns (ListCompetitionsResponse) {
+    }
+}
