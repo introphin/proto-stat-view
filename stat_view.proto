@@ -13,7 +13,7 @@ message AdvertiserPayout {
 message AdvertiserPayoutFilter {
     string date_from = 1;
     string date_to = 2;
-    repeated int32 user_d = 3;
+    repeated int32 user_id = 3;
     string currency = 4;
 }
 
